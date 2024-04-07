@@ -1,0 +1,43 @@
+{% extends 'tutor/index.html' %}
+{% block c %}
+<body>
+<form id="form1" name="form1" method="post" action="/myapp/viewnote_post/">
+    {% csrf_token %}
+  <table class="pull-left">
+      <tr>
+    <th scope="col"><input type="text" name="textfield" id="textfield" class="form-control" required/></th>
+    <th scope="col"><input type="submit" name="button" id="button" value="Search" class="btn btn-success"/></th>
+  </tr>
+</table>
+  <table class="table table-bordered">
+      <tr>
+      <th width="54" scope="col">SI/NO</th>
+              <th width="56" scope="col">TUTOR NAME</th>
+
+      <th width="52" scope="col">DATE</th>
+      <th width="66" scope="col">TOPIC NAME</th>
+              <th width="56" scope="col">NOTE</th>
+
+      <th width="33" scope="col"></th>
+      <th width="88" scope="col">&nbsp;</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+        <td>{{ i.TUTOR.firstname }}</td>
+
+      <td>{{ i.date }}</td>
+      <td>{{ i.topic }}</td>
+
+      <td><a href="{{ i.note }}" download="">VIEW</a></td>
+      <td><a href="/myapp/editnote/{{ i.id }}">Edit</a></td>
+      <td><a href="/myapp/detelenote/{{ i.id  }}">Delete</a></td>
+    </tr>
+      {% endfor %}
+    <tr>
+      <td height="41" colspan="6"><div align="center"><a href="/myapp/addnote/">add</a></div></td>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

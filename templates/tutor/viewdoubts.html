@@ -1,0 +1,26 @@
+{% extends 'tutor/index.html' %}
+{% block c %}
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table class="table table-bordered">
+      <tr>
+      <th width="168" scope="col">SI/NO</th>
+      <th width="168" scope="col">Student Name</th>
+      <th width="168" scope="col">Date</th>
+      <th width="168" scope="col">Doubts</th>
+      <th width="30" scope="col">Reply</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.STUDENT.firstname }} {{ i.STUDENT.lastname }}</td>
+      <td>{{ i.date }}</td>
+      <td>{{ i.doubt }}</td>
+      <td>{% if i.status == 'pending' %}<a href="/myapp/replydoubt/{{ i.id }}">Reply</a>{% else %}{{ i.reply }}{% endif %}</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'tutor/index.html' %}
+{% block c %}
+
+<body>
+<form id="form1" name="form1" method="get" action="">
+    {% csrf_token %}
+  <table class="table table-bordered">
+      <tr>
+    <th colspan="2" scope="row"><img src="{{ data.photo }}" height="100px" width="80px"></th>
+    </tr>
+  <tr>
+    <th width="178" scope="row">NAME</th>
+    <td width="160">{{ data.firstname }} {{ data.lastname }}</td>
+  </tr>
+  <tr>
+    <th scope="row">DOB</th>
+    <td>{{ data.DOB }}</td>
+  </tr>
+  <tr>
+    <th scope="row">GENDER</th>
+    <td>{{ data.gender }}</td>
+  </tr>
+  <tr>
+    <th scope="row">ADDRESS</th>
+    <td>{{ data.houseno }}<br>{{ data.place }}<br>{{ data.district }}<br>{{ data.state }}<br>{{ data.country }}<br>{{ data.PIN }}</td>
+  </tr>
+  <tr>
+    <th scope="row">QUALIFICATION</th>
+    <td>{{ data.qualification }}</td>
+  </tr>
+  <tr>
+    <th scope="row">SUBJECT</th>
+    <td>{{ data.SUBJECT.name }}</td>
+  </tr>
+  <tr>
+    <th scope="row">EMAIL</th>
+    <td>{{ data.email }}</td>
+  </tr>
+  <tr>
+    <th scope="row">PHONE NO</th>
+    <td>{{ data.phoneno }}</td>
+  </tr>
+    <tr>
+        <th colspan="2"><a href="/myapp/updateprofile_tutor/">Update Profile</a></th>
+    </tr>
+</table>
+</form>
+
+</body>
+{% endblock %}

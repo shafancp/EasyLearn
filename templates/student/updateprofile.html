@@ -1,0 +1,60 @@
+{% extends 'home.html' %}
+{% block c %}
+
+<body>
+<form action="/myapp/updateprofile_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">
+    {% csrf_token %}
+  <table class="table table-bordered">
+      <th scope="row">First Name</th>
+      <td><input type="text" name="textfield" value="{{ data.firstname }}" id="textfield" class="form-control"/></td>
+    </tr>
+    <tr>
+      <th scope="row">Last Name</th>
+      <td><input type="text" name="textfield2" value="{{ data.lastname }}" id="textfield2" class="form-control"/></td>
+    </tr>
+    <tr>
+      <tr>
+      <th width="64" scope="row">Photo</th>
+      <td width="330"><img src="{{ data.photo }}" width="80px" height="100px"><br>
+          <input type="file" name="fileField" id="fileField" class="form-control"/></td>
+    </tr>
+    <tr>
+      <th scope="row">Date Of Birth</th>
+      <td><input type="date" name="textfield3" value="{{ data.DOB|date:'Y-m-d' }}" id="textfield3" class="form-control"/></td>
+    </tr>
+    <tr>
+      <th scope="row">Gender</th>
+      <td><p>
+        <label>
+          <input type="radio" name="RadioGroup1" {% if data.gender == "Male" %}checked{% endif %} value="Male" id="RadioGroup1_0" class="form-control"/>
+          male</label>
+        <br />
+        <label>
+          <input type="radio" name="RadioGroup1" {% if data.gender == "Female" %}checked{% endif %} value="Female" id="RadioGroup1_1" class="form-control"/>
+          female</label>
+        <br />
+      </p></td>
+    </tr>
+      <tr>
+          <th>Course</th>
+          <td><input type="text" name="textfield4" value="{{ data.course }}" id="textfield4" class="form-control/"></td>
+      </tr>
+      <tr>
+          <th>Institution</th>
+          <td><input type="text" name="textfield5" value="{{ data.institution }}" id="textfield5" class="form-control"/></td>
+      </tr>
+    <tr>
+      <th scope="row">Email</th>
+      <td><input type="text" name="textfield6" value="{{ data.email }}" id="textfield6" class="form-control"/></td>
+    </tr>
+    <tr>
+      <th scope="row">Phone number</th>
+      <td><input type="text" name="textfield7" value="{{ data.phoneno }}" id="textfield7" class="form-control"/></td>
+    </tr>
+      <tr>
+      <th colspan="2" scope="row"><input type="submit" name="button" id="button" value="Update" class="btn btn-success"></th>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

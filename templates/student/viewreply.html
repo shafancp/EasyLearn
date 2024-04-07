@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+{% block c %}
+
+<body><form action="" method="get">
+  <table class="table table-bordered">
+      <tr>
+      <th width="43" scope="col">S/NO</th>
+      <th width="43" scope="col">Head</th>
+      <th width="43" scope="col">Date</th>
+      <th width="209" scope="col">Reply</th>
+    </tr>
+         {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.head }}</td>
+      <td>{{ i.date }}</td>
+      <td>{{ i.reply }}</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+{% endblock %}

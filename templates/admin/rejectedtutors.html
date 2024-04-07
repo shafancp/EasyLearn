@@ -1,0 +1,48 @@
+{% extends 'admin/index.html' %}
+{% block c %}
+<body>
+<form id="form1" name="form1" method="post" action="/myapp/rejectedtutors_post/">
+    {% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <th width="226" scope="col"><div align="left">
+        <input type="text" name="textfield" id="textfield" class="form-control" required/>
+      </div></th>
+      <th width="234" colspan="11" scope="col"><div align="left">
+        <input type="submit" name="button" id="button" value="Search" class="btn btn-success"/>
+      </div></th>
+    </tr>
+    </table>
+<table class="table table-bordered">
+    <tr>
+      <td>SI/NO</td>
+      <td>FIRST NAME</td>
+      <td>LAST NAME</td>
+      <td>PHOTO</td>
+      <td>ID PROOF</td>
+      <td>DOB</td>
+      <td>GENDER</td>
+      <td>ADDRESS</td>
+      <td>EMAIL</td>
+      <td>PHONE NO</td>
+      <td>SUBJECT</td>
+    </tr>
+        {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.firstname }}</td>
+      <td>{{ i.lastname }}</td>
+      <td><img src="{{ i.photo }}"height="70px" width="70px">&nbsp;</td>
+      <td><img src="{{ i.idproof }}"height="70px" width="70px"></td>
+      <td>{{ i.DOB }}&nbsp;</td>
+      <td>{{ i.gender }}&nbsp;</td>
+      <td>{{ i.houseno }}&nbsp;<br>{{ i.place }}<br>{{ i.district }}<br>{{ i.state }}<br>{{ i.PIN }}<br>{{ i.country }}</td>
+      <td>{{ i.email }}&nbsp;</td>
+      <td>{{ i.phoneno}}&nbsp;</td>
+      <td>{{ i.SUBJECT.name }}&nbsp;</td>
+        {% endfor %}
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

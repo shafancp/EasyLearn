@@ -1,0 +1,26 @@
+{% extends 'tutor/index.html' %}
+{% block c %}
+<body>
+<form id="form1" name="form1" method="post" action="/myapp/addnote_post/" enctype="multipart/form-data">
+  <table class="table table-bordered">
+      {% csrf_token %}
+  <tr>
+    <th width="85" scope="row">Document</th>
+    <td width="238"><input type="file" name="filefield" id="filefield" class="form-control" required/></td>
+  </tr>
+  <tr>
+    <th scope="row">Topic Name</th>
+    <td><input type="text" name="textfield2" id="textfield2" class="form-control" required/></td>
+  </tr>
+    <tr>
+        <th scope="row">Description</th>
+            <td><input type="text" name="textfield3" id="textfield3" class="form-control" required/></td>
+    </tr>
+  <tr>
+    <th height="76" colspan="2" scope="row"><input type="submit" name="button" id="button" value="Add" class="btn btn-success"/></th>
+    </tr>
+</table>
+
+</form>
+</body>
+{% endblock %}

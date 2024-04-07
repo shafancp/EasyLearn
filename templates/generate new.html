@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/index assets/style.css">
+    <title>EasyLearn</title>
+</head>
+<body background="/static/index assets/images/bgimage.jpg">
+<div class="main-body">
+    <div class="generate-body">
+        <div class="content-body">
+            <div class = "content">
+                {% if conversation_history %}
+                {% for entry in conversation_history %}
+                <strong>User:</strong> {{ entry.question }}<br>
+                <strong>Response:</strong> {{ entry.response | safe }}<br><br>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <div id="form-container" class="popup-form" style="display: none;">
+                <form id="my-form" method="post" enctype="multipart/form-data" action="/myapp/pdf_process/" onsubmit="submitForm('form-container')">
+                    {% csrf_token %}
+                    <br>
+                    <h4>Upload your PDF</h4>
+                    <input type="file" name="pdf_docs" class="form-control" id="inputGroupFile02" style="margin: 0px 10px; width: 95%;" multiple required><br>
+                    <input type="button" value="cancel" class="btn btn-light" onclick="submitForm('form-container')">
+                    <button type="submit" class="btn btn-success" style="background-color:#5C8374;">Upload</button>
+                </form>
+            </div>
+            <div id="download-container"  class="popup-form" style="display: none;">
+                <form id="download-form" method="post" enctype="multipart/form-data" action="/myapp/download_conversation/" onsubmit="submitForm('download-container')">
+                    {% csrf_token %}
+                    <br>
+                    <h4>Download</h4>
+                    <center><table>
+                        <tr style="padding:15px;">
+                            <td>Choose Format</td>
+                    <td><select name="select" class="form-control">
+                                    <option value="docx">Docx</option>
+                                    <option value="pdf">PDF</option>
+                    </select></td>
+                        </tr>
+                    </table></center>
+                    <input type="button" value="cancel" class="btn btn-light" onclick="submitForm('download-container')">
+                    <input type="submit" value="export" class="btn btn-success">
+                </form>
+            </div>
+        <div id="toggle" class="form-check form-switch">  <input class="form-check-input" type="checkbox" name="toggle" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Ask from the PDF</label></div>
+            <button class="download-logo" onclick="uploaddoc('download-container')">
+                <img src="/static/index assets/images/download.svg" alt="download logo" width="25px">
+              </button>
+        </div>
+        <div class="search-bar">
+        <button class="doc-logo on-generate" onclick="uploaddoc('form-container')">
+            <img src="/static/index assets/images/doc.svg" alt="Document logo" width="25px">
+          </button>
+
+            <form method="post" enctype="multipart/form-data" action="/myapp/user_input_post/" class="search-form on-generate" >
+                        {% csrf_token %}
+                <input type="file" name="image" accept=".jpg, .jpeg, .png" id="fileInput" style="display: none;"/>
+                <label for="fileInput" class="file-input-label">
+                    <img src="/static/index assets/images/image.svg" alt="Upload Icon" width="30px" style="margin: 14px 0px 0px 10px;" />
+                </label>
+                <input id = "search-bar-text" name="user_question" type="text" placeholder="Type Here..." required>
+                <input type="hidden" name="toggle" id="toggle-value">
+            </form>
+        <button class="mic on-generate" onclick="toggleVoiceRecognition()">
+            <img id="mic-icon" src="/static/index assets/images/mic.svg" alt="Mic logo" width="25px">
+        </button>
+        <button type="button" class="generate-btn on-generate" style="margin: 0px;" onclick="submitSearchForm()">Generate</button>
+        </div>
+        </div>
+</div>
+</body>
+<script>
+var recognition = new SpeechRecognition();
+
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
+function uploaddoc(containerId) {
+    console.log("Button clicked");
+    var formContainer = document.getElementById(containerId);
+    if (formContainer) {
+        formContainer.style.display = "block"
+        document.getElementById("doc-logo").style.color = "#5C8374";
+        document.body.classList.add("blur-background");
+    }
+}
+function submitForm(containerId) {
+    var formContainer = document.getElementById(containerId);
+    if (formContainer) {
+        formContainer.style.display = "none";
+        document.body.classList.remove("blur-background");
+    }
+}
+function submitSearchForm() {
+    var toggleSwitch = document.getElementById("flexSwitchCheckDefault");
+    var toggleValue = toggleSwitch.checked;
+    document.getElementById("toggle-value").value = toggleValue;
+    var searchForm = document.querySelector(".search-form"); // Use querySelector with the class
+    searchForm.submit();
+}
+
+function scrollToBottom() {
+    var contentDiv = document.querySelector('.content');
+    contentDiv.scrollTop = contentDiv.scrollHeight;
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    scrollToBottom();
+});
+
+function toggleVoiceRecognition() {
+    if (!recognition || recognition.aborted || recognition.audioend || recognition.error) {
+        startVoiceRecognition();
+    } else {
+        stopVoiceRecognition();
+    }
+}
+
+function startVoiceRecognition() {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = true;
+
+
+    recognition.onresult = function (event) {
+        var result = event.results[event.results.length - 1][0].transcript;
+        document.getElementById("search-bar-text").value += result+' ';
+    };
+
+    recognition.onend = function () {
+            setTimeout(function () {
+        recognition.start();
+    }, 500);
+    };
+
+    recognition.start();
+}
+
+function stopVoiceRecognition() {
+    if (recognition) {
+        recognition.stop();
+        recognition = null;
+    }
+}
+</script>
+</html>

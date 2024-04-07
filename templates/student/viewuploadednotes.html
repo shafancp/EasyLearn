@@ -1,0 +1,43 @@
+{% extends 'student/studentindex.html' %}
+{% block body %}
+<body><form action="/myapp/viewnotes_post/" method="post">
+{% csrf_token %}
+{#  <table width="532" height="100" border="1">#}
+{#    <tr>#}
+{#      <td width="158" colspan="2">Subject<select name="select" id="select">#}
+{#      </select></td>#}
+{#      <td width="158" colspan="2">Tutor<select name="select2" id="select2">#}
+{#      </select></td>#}
+{#      <td width="300">Topic<input type="text" name="textfield" id="textfield" /></td>#}
+{#      <td width="158"><div align="center">#}
+{#        <input type="submit" name="button" id="button" value="Search" />#}
+{#      </div></td>#}
+{#    </tr>#}
+{#  </table>#}
+<table class="table table-bordered">
+    <tr>
+      <th scope="col">S/NO</th>
+      <th scope="col">Topic </th>
+      <th scope="col">description</th>
+      <th scope="col">date </th>
+      <th scope="col">note</th>
+      <th scope="col">tutor</th>
+      <th scope="col">download</th>
+    </tr>
+             {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.topic }}</td>
+      <td>{{ i.description }}</td>
+      <td>{{ i.date }}</td>
+      <td><img src="{{ i.note }}" height="50" width="50"></td>
+      <td>{{ i.TUTOR.firstname}}</td>
+      <td><a href="{{ i.note }}" download="">DOWNLOAD</a></td>
+
+    </tr>
+      {% endfor %}
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+{% endblock %}

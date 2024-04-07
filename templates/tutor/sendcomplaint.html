@@ -1,0 +1,21 @@
+{% extends 'tutor/index.html' %}
+{% block c %}
+
+<body><form action="/myapp/sendcomplaint_post/" method="post">
+  {% csrf_token %}
+  <table class="table table-bordered">
+      <tr>
+      <th width="157" scope="row">Head</th>
+      <td width="194"><input type="text" name="textfield" id="textfield" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th scope="row">Complaint</th>
+      <td><input type="text" name="textfield2" id="textfield2" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><input type="submit" name="button" id="button" value="Send" class="btn btn-success"/></th>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

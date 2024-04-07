@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Voice Note App</title>
+    <meta name="description" content="A Voice Note App that allows you to take voice and/or text notes and play them back.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/assets/ico/favicon.ico">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <!-- Bootstrap CDN CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-0Mou2qXGeXK7k/Ue/a1hspEVcEP2zCpoQZw8/MPeUgISww+VmDJcy2ri9tX0a6iy" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container-fluid align-center">
+        <img src="/static/assets/img/code-mic-150.png" alt="Voice Note App Logo">
+        <h1>QA/ Summary Generator</h1>
+        <p class="page-description">This app allows you to take voice and/or text notes and play them back.</p>
+        <hr>
+        <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+        <div class="app">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-md-6 align-center">
+
+  <h3>Upload pdf/ docx</h3>
+                     <form action="/myapp/inputdoc_post/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+                         <div class="row">
+
+                             <div class="col-lg-11">
+                                  <input type="file" name="filefield" class="form-control">
+                             </div>
+                             <div class="col-lg-1">
+                                 <input type="submit" name="submit" value="Upload File" class="btn btn-success">
+                             </div>
+                         </div>
+
+
+       <br>
+
+    </form>
+
+                      <h3>Add New Voice Note</h3>
+
+
+                     <button id="start-record-btn" class="btn-success" title="Start Recording">Start Recognition</button>
+                    <button id="pause-record-btn" class="btn-warning" title="Pause Recording">Pause Recognition</button>
+{#                    <button id="save-note-btn" class="btn-info" title="Save Note">Save Note</button>#}
+                    <p id="recording-instructions">Press the
+                        <strong>Start Recognition</strong> button and allow access.</p>
+
+
+
+
+    <form action="/myapp/QAgeneration/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea name="content" id="note-textarea"  rows="8" style="width: 100%" class="form-control" >{{ de }}</textarea><br>
+{#        <textarea name="content" cols="80" rows="8"></textarea><br>#}
+        <input type="submit" name="submit" value="Generate QA" class="btn btn-success">
+    </form>
+
+
+{#                    #}
+{#                    <div class="input-single">#}
+{#                        <textarea id="note-textarea" placeholder="Create a new note by typing or using voice recognition." rows="6"></textarea>#}
+{#                    </div>#}
+
+
+
+
+                      </div>
+               <div class="col-lg-3"></div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /app -->
+    </div>
+
+    <div id="footer">
+        <div class="clearfix1">
+            <div class="container">
+                <div class="row">
+
+                    <div class="center">
+                        <p>Speech to Text Voice Note App 2018</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+    </div>
+    <!-- /footer -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/assets/js/script.js"></script>
+
+</body>
+
+</html>

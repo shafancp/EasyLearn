@@ -1,0 +1,27 @@
+{% extends 'home.html' %}
+{% block c %}
+<body><form action="" method="get">
+<table class="table table-bordered">
+    <tr>
+      <th colspan="2" scope="row"><img src="{{ data.photo }}" height="100px" width="80px" alt="not found"></th>
+    </tr>
+    <tr>
+      <th width="171" scope="row">First name</th>
+      <td width="133">{{data.firstname}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Last name</th>
+      <td>{{ data.lastname }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Subject</th>
+      <td>{{ data.SUBJECT.name }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Qualification</th>
+      <td>{{ data.qualification }}</td>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

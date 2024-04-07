@@ -1,0 +1,18 @@
+{% extends 'tutor/index.html' %}
+{% block c %}
+
+<body>
+<form method="post" action="/myapp/sendfeedback_post/">
+    {% csrf_token %}
+  <table class="table table-bordered">
+      <tr>
+      <th scope="row">Feedback</th>
+      <td><input type="text" name="textfield" id="textfield" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><input type="submit" name="button" id="button" value="Send" class="btn btn-success"/></th>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

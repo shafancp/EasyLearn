@@ -1,0 +1,39 @@
+{% extends 'home.html' %}
+{% block c %}
+<body>
+<style>
+    img { border-radius: 20px; }
+    .name { font-size: 30px }
+    table { text-align: left; }
+</style>
+    <form action="" method="get">
+        <table border="0">
+            <tr>
+                <th rowspan="5"><img src="{{ data.photo }}" height="300px" width="280px"></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th>email</th>
+                <td>{{ data.email }}</td>
+            </tr>
+            <tr>
+                <th>phone</th>
+                <td>{{ data.phoneno }}</td>
+            </tr>
+            <tr>
+                <th>dob</th>
+                <td>{{ data.DOB }}</td>
+            </tr>
+            <tr>
+                <th>gender</th>
+                <td>{{ data.gender }}</td>
+            </tr>
+            <tr>
+                <th class="name" style="text-align:center;">{{ data.firstname }} {{ data.lastname }}</th>
+                <td></td>
+                <td><a href="/myapp/updateprofile/">Update Profile</a></td>
+            </tr>
+        </table>
+    </form>
+</body>
+{% endblock %}

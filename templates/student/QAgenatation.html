@@ -1,0 +1,48 @@
+{% extends 'student/studentindex.html' %}
+{% block body %}
+<body>
+<table class="table table-bordered">
+{% for i in data %}
+<tr>
+<td>{{ forloop.counter }}</td>
+<td>{{ i.question }}</td>
+</tr>
+    <tr>
+        <td>Answer: </td>
+        <td>{{ i.answer }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+
+<h1>Summmary</h1>
+
+<p>{{ d }}</p>
+
+<br/>
+<form method="post" action="/myapp/exportwav/">
+    {% csrf_token %}
+    <h3>Export</h3>
+<table>
+    <tr>
+        <td><select name="select" class="form-control">
+            <option value="wav">Wav</option>
+            <option value="doc">Doc</option>
+        </select></td>
+        <td><input type="submit" value="export" class="btn btn-success"></td>
+    </tr>
+</table>
+    {% if request.session.status == "ok" %}
+
+        <a href="{{ request.session.file }}" download>Download here</a>
+
+    {% else %}
+
+        No download
+    {% endif %}
+
+</form>
+
+
+</body>
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/index assets/style.css">
+    <title>EasyLearn</title>
+</head>
+
+<body background="/static/index assets/images/bgimage.jpg">
+    <div class="navbar">
+        <div class="logo"><span style="color: #5C8374;;">Easy</span>Learn</div>
+        <div class="nav-items">
+            <a href="/myapp/adminhome/" class="nav-item">Home</a>
+            <div class="dropdown">
+              <a class="nav-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="flase" data-bs-display="static">
+                Tutor
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="/myapp/viewtutorverify/">View</a></li>
+                <li><a class="dropdown-item" href="/myapp/approvedtutors/">Approved</a></li>
+                <li><a class="dropdown-item" href="/myapp/rejectedtutors/">Rejected</a></li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <a class="nav-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="flase" data-bs-display="static">
+                Subject
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="/myapp/addsubject/">Add</a></li>
+                <li><a class="dropdown-item" href="/myapp/viewsubject/">View</a></li>
+              </ul>
+            </div>
+            <a href="/myapp/viewstudent/" class="nav-item">Student</a>
+            <a href="/myapp/viewnotes_admin/" class="nav-item">Notes</a>
+            <div class="dropdown">
+              <a class="nav-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="flase" data-bs-display="static">
+                Others
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="/myapp/viewcomplaint/">Complaint</a></li>
+                <li><a class="dropdown-item" href="/myapp/viewfeedback/">Feedback</a></li>
+                  <li><a class="dropdown-item" href="/myapp/change_password/">Change Password</a></li>
+              </ul>
+            </div>
+            <!-- Add more items as needed -->
+        </div>
+        <button class="generate-btn" onclick="redirectToUserInput()">Logout</button>
+    </div>
+    <div class="main-body">
+    <div class="main">
+        {% block c %}
+
+
+        {% endblock %}
+    </div>
+    </div>
+    <!-- Rest of your content goes here -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function($) {
+    $(".nav-item").click(function() {
+        $(".nav-item").removeClass("active");
+        $(this).addClass("active");
+    });
+});
+
+function redirectToUserInput() {
+    window.location.href = "/myapp/login/";
+}
+</script>
+</body>
+
+</html>

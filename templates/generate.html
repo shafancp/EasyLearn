@@ -1,0 +1,44 @@
+<!-- yourappname/templates/yourappname/custom_template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with PDF using Gemini💁</title>
+    <!-- Add any additional CSS or script references if needed -->
+</head>
+<body>
+    <h1>Chat with PDF using Gemini💁</h1>
+
+    <form method="post" enctype="multipart/form-data" action="/myapp/pdf_process/">
+        {% csrf_token %}
+        <label for="pdf_docs">Upload PDF Files:</label>
+        <input type="file" name="pdf_docs" id="pdf_docs" accept=".pdf" multiple>
+        <br>
+        <button type="submit">Submit & Process</button>
+    </form>
+    <form method="post" enctype="multipart/form-data" action="/myapp/user_input_post/">
+        {% csrf_token %}
+        ask from pdf<input type="checkbox" id="toggle_checkbox" name="toggle">
+        <br>
+        <label for="user_question">Ask a Question from the PDF Files:</label>
+        <input type="text" name="user_question" id="user_question" required>
+        <br>
+
+        <button type="submit">Submit & Process</button>
+    </form>
+
+    {% if conversation_history %}
+    {% for entry in conversation_history %}
+    <strong>User:</strong> {{ entry.question }}<br>
+    <strong>Response:</strong> {{ entry.response | safe }}<br><br>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Add any additional HTML content as needed -->
+
+    <script>
+        // Add any JavaScript code if needed
+    </script>
+</body>
+</html>

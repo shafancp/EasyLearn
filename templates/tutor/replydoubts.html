@@ -1,0 +1,18 @@
+{% extends 'tutor/index.html' %}
+{% block c %}
+
+<body><form action="/myapp/replydoubt_post/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="rid" id="textfield2" value="{{ data }}" class="form-control" required/>
+  <table class="table table-bordered">
+      <tr>
+      <th width="92" scope="row">Reply</th>
+      <td width="161"><input type="text" name="textfield" id="textfield" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><input type="submit" name="button" id="button" value="Send" class="btn btn-success"/></th>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

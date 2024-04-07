@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit subject</title>
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="/myapp/editsubject_post/">
+    {% csrf_token %}
+<table class="table table-bordered">
+    <tr>
+      <th width="88" scope="col">SUBJECT</th>
+      <th width="344" scope="col"><label for="textfield"></label>
+      <input type="text" name="textfield" id="textfield" class="form-control" required/></th>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="button" id="button" value="Edit" class="btn btn-success"/></td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+</form>
+</body>
+</html>

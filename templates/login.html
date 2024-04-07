@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EasyLearn Login</title>
+<link rel="stylesheet" href="/static/index assets/login_style.css">
+  <style>
+      .left-div {
+      background-image:'/static/index_assets/images/leftbg.jpg');
+    }
+  </style>
+</head>
+<body background="/static/index assets/images/bgimage.jpg">
+  <div class="main-body">
+    <div class="main">
+      <div class="right-div">
+        <h2>LOGIN</h2>
+  <form action="/myapp/login_post/" method="post">
+    {% csrf_token %}
+    <input type="email" id="username"  name="textfield" placeholder="Email" required="">
+    <input type="password" id="password" placeholder="Password" name="textfield2" required="">
+    <input type="submit" value="Login">
+  </form>
+  <br>
+  <div class="signup-link">Don't have an account? <br>
+    SignUp as <a href="/myapp/registration/">Student</a> or <a href="/myapp/registration_tutor/">Tutor</a></div>
+</div>
+<div class="left-div">
+    <h1>Easy<span id="learn">Learn</span></h1>
+</div>
+</div>
+</div>
+</body>
+</html>
